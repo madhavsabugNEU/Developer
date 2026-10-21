@@ -1,0 +1,8 @@
+// A link that opens in a new tab.
+export default function ExternalLink({ href, children }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      {children}
+    </a>
+  )
+}
