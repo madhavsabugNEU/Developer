@@ -16,7 +16,7 @@ export default function Experience() {
         </ul>
       </article>
 
-      <article>
+      <article id="knack">
         <h3>Knack: Peer Tutor</h3>
         <p className="meta">Feb to Jun 2026</p>
         <ul>
@@ -28,7 +28,7 @@ export default function Experience() {
         </ul>
       </article>
 
-      <article>
+      <article id="creative-factory">
         <h3>My Creative Factory: Product &amp; Client Management Intern</h3>
         <p className="meta">Jun to Jul 2024 · Singapore</p>
         <ul>

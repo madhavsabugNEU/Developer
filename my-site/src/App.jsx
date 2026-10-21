@@ -13,8 +13,8 @@ function App() {
   return (
     <>
       <Nav />
+      <Hero />
       <main>
-        <Hero />
         <XgChapter />
         <PipelineChapter />
         <ShelfLifeChapter />

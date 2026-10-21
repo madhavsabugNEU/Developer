@@ -8,7 +8,7 @@ export const contact = {
 
 // PDFs live in public/resumes/.
 export const resumes = [
-  { label: 'Data / ML (CS)', href: '/resumes/Madhav-Sabu-Resume-CS.pdf' },
-  { label: 'Business Analytics (Econ)', href: '/resumes/Madhav-Sabu-Resume-Econ.pdf' },
-  { label: 'Comp Bio (Bio)', href: '/resumes/Madhav-Sabu-Resume-Bio.pdf' },
+  { id: 'cs', short: 'CS', label: 'Data / ML (CS)', href: '/resumes/Madhav-Sabu-Resume-CS.pdf' },
+  { id: 'econ', short: 'Econ', label: 'Business Analytics (Econ)', href: '/resumes/Madhav-Sabu-Resume-Econ.pdf' },
+  { id: 'bio', short: 'Bio', label: 'Comp Bio (Bio)', href: '/resumes/Madhav-Sabu-Resume-Bio.pdf' },
 ]

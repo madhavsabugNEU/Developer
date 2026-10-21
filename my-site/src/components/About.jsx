@@ -3,9 +3,14 @@ export default function About() {
     <section id="about" className="section">
       <h2>About</h2>
       <p>
-        I'm a second-year student at Northeastern University in Boston, with
-        roots in India and Singapore. Before Northeastern, I attended UWC South
-        East Asia, where I completed the IB Diploma.
+        I'm a second-year student at Northeastern University in Boston. I grew
+        up in India, Dubai (where I lived for five years), and Singapore, where
+        I attended UWC South East Asia and completed the IB Diploma.
+      </p>
+      <p>
+        I'm looking for Spring 2027 co-ops (January to June 2027) in data
+        science, analytics, data engineering, AI/ML, computational biology, and
+        finance-adjacent analytics.
       </p>
 
       <h3>Education</h3>

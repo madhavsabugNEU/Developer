@@ -4,7 +4,7 @@ export default function ResearchChapter() {
     <section id="research" className="section">
       <h2>Research</h2>
 
-      <article>
+      <article id="el-salvador">
         <h3>Economic Impact of El Salvador's Gang Crackdown</h3>
         <p className="meta">Independent research · Mar to Nov 2024</p>
         <p>
@@ -20,7 +20,7 @@ export default function ResearchChapter() {
         </p>
       </article>
 
-      <article>
+      <article id="enzyme">
         <h3>Enzyme Activity Experiment</h3>
         <p className="meta">Independent lab research · High school</p>
         <p>

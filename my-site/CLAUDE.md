@@ -35,10 +35,10 @@ If anything in this file conflicts with a request, ask before acting.
 - Madhav Sabu (he/him), second-year student at Northeastern University, Boston, MA
 - B.S. in Data Science & Business, Concentration in Marketing Analytics, Minor in Biology. Expected graduation May 2029.
 - GPA 3.74/4.0. Dean's List (Fall 2025, Spring 2026).
-- Roots in India and Singapore. Attended UWC South East Asia (IB Diploma).
+- Grew up in India, Dubai (lived there 5 years), and Singapore. Attended UWC South East Asia in Singapore (IB Diploma).
 - Pitch: I combine data science with business thinking to turn messy data into reliable insights and tools.
 - Contact: madhavsabug@gmail.com · linkedin.com/in/madhavsabu/ · github.com/madhavsabugNEU
-- Don't write my phone number into the site's pages. It's okay for it to appear in the resume PDFs (decided 2026-10-21).
+- Don't write my phone number into the site's pages. It's fine for it to appear in the resume PDFs.
 
 ## Skills (list only these)
 
@@ -112,33 +112,57 @@ Badminton, football (soccer) analytics, biking, exploring new music.
 
 ## Design concept (decided)
 
-### The big idea: a transit line through the page
+### The big idea: the Green Line
 
-- The hero is a transit map of my path: India → Singapore → UWCSEA → Northeastern → projects.
-- As you scroll, the line runs down the page. Each project is a "station" that opens a chapter with its own visual world:
-  - **xG Modeling → "Matchday":** dark pitch-green, chalk pitch lines, shots plotted and colored by xG. The line becomes the pitch touchline.
-  - **Data Cleaning Pipeline → "Clean run":** cream paper and monospace text. Messy rows (typos, duplicates, NaN, outliers) get struck out and come out clean. The line becomes the data stream.
-  - **ShelfLife → "Blueprint":** an ER diagram of my actual schema, with foreign-key lines drawing themselves in.
-  - **Research (El Salvador, enzyme) → "Lab notebook":** graph paper, serif type, papers shown as annotated pages and labeled specimens. The line becomes a pencil line.
-- After the projects, the line returns to navy for Experience, About, Resume, and Contact, so the page ends calm and professional.
+- The site is themed on Boston's Green Line, since Northeastern sits on it. Use our own green and our own style. Do NOT copy the MBTA logo, the "T" symbol, or official MBTA signage.
+- Colors: Green Line green `#1a7f4b` for the branches. Navy `#1F3864` for my name, headings, and the pre-Boston journey.
 
-### The hook: "Pick your route" (first screen)
+### The hero (first screen), approved mockup
 
-- On the first screen, visitors choose one of three lines:
-  - **Data / ML line** → highlights xG, Data Cleaning Pipeline, ShelfLife → resume button downloads the **CS** resume
-  - **Business Analytics line** → highlights ShelfLife, Data Cleaning Pipeline, El Salvador research, plus the My Creative Factory and Knack experience → **Econ** resume
-  - **Comp Bio line** → highlights the Enzyme experiment, Data Cleaning Pipeline, xG (as ML experience) → **Bio** resume
-  - (This mapping is a first draft. We'll refine it.)
-- Choosing a line highlights its stations on the map, reorders or emphasizes the matching project chapters, and switches the resume download to the matching version.
-- With no line chosen, the page shows everything and the resume button offers all three versions.
-- The first screen must work without choosing a line: name, one-line pitch, GitHub, LinkedIn, email, and a resume button are always visible.
+- Top left: my name (navy, large), a two-line pitch ("Data science + business at Northeastern." / "Turning messy data into reliable insights."), and a small monospace prompt: "pick a line to board →".
+- The map, left to right:
+  - **My journey before Boston:** a dotted navy line with three small stations: **India → Dubai → Singapore**.
+  - **Northeastern:** a big hub station (a white circle with a thick green ring), where the line turns solid green.
+  - **Four green branches** fan out to the right from Northeastern, like the real Green Line. Each one ends in a green circle badge with its letter:
+    - **B** = Business Analytics
+    - **C** = Comp Bio
+    - **D** = Data / ML
+    - **E** = All stops (Northeastern's real Green Line branch)
+  - Small stop dots sit along each branch.
+- Along the bottom, always visible: GitHub, LinkedIn, and Email as pill buttons, plus a filled navy Resume button.
+- On phones, the map turns vertical, with the journey on top, Northeastern in the middle, and the branches dropping downward.
+
+### Boarding a line ("Pick your route")
+
+- Clicking a branch (the line, its label, or its badge) "boards" that line. The view moves along the branch into a line page specialized for that career type. (Do the full animation in a later step. For now, a simple transition is fine.)
+- The line page shows:
+  - A header with the letter badge, the line name, and "X stops from Northeastern."
+  - A vertical green line with the projects as stops, top to bottom. Each stop has a name and a short subtitle.
+  - **Transfer stations:** projects that appear on more than one line get a bigger dot and a "transfer" tag.
+  - A "← Back to map" button and a resume button that matches the line.
+- The stops on each line (first draft):
+  - **B, Business Analytics:** ShelfLife (transfer) · Data Cleaning Pipeline (transfer) · El Salvador research · My Creative Factory · Knack → **Econ** resume
+  - **C, Comp Bio:** Enzyme experiment · Data Cleaning Pipeline (transfer) · xG model (transfer) → **Bio** resume
+  - **D, Data / ML:** xG model (transfer) · Data Cleaning Pipeline (transfer) · ShelfLife (transfer) → **CS** resume
+  - **E, All stops:** every project. The resume button lets you choose any of the three versions.
+- Clicking a stop opens that project's chapter (see below).
+- The line choice should be in the URL hash (for example `#line-d`), so I can send a recruiter a link straight to the D line.
+
+### Project chapters (later steps)
+
+Each project gets its own visual world when you open its stop:
+- **xG Modeling → "Matchday":** dark pitch-green, chalk pitch lines, shots plotted and colored by xG
+- **Data Cleaning Pipeline → "Clean run":** cream paper and monospace text. Messy rows get struck out and come out clean.
+- **ShelfLife → "Blueprint":** an ER diagram of my actual schema, with foreign-key lines drawing themselves in
+- **Research (El Salvador, enzyme) → "Lab notebook":** graph paper, serif type, annotated pages
+- After the projects, Experience, About, Resume, and Contact go back to the calm navy-and-white style.
 
 ### Guardrails
 
 - A simple nav to jump to any section must always be available.
 - Motion is optional. Respect `prefers-reduced-motion`, and make sure every chapter has a clean, static version that works on phones. Content never depends on animation.
 - Fast-loading. No heavy libraries unless really needed.
-- Brand color: navy `#1F3864` (matches my resume). Typography to be decided in a later step.
+- Typography: a clean sans-serif for now (to be refined in polish). Monospace for small transit-style labels.
 - Resume PDFs go in `public/resumes/` as `Madhav-Sabu-Resume-CS.pdf`, `Madhav-Sabu-Resume-Econ.pdf`, and `Madhav-Sabu-Resume-Bio.pdf`. The PDFs may include my phone number.
 
 ---
@@ -146,8 +170,8 @@ Badminton, football (soccer) analytics, biking, exploring new music.
 ## Build plan (one step at a time)
 
 1. ✅ Lock the concept and hook (done in the design chat)
-2. Skeleton: one component per section (Hero, each project chapter, Experience, About, Resume, Contact), a simple nav, real content in plain styling, mobile-friendly. No theming or animation yet.
-3. Hero: the transit map and "Pick your route" interaction, including the resume switching.
+2. ✅ Skeleton: one component per section (Hero, each project chapter, Experience, About, Resume, Contact), a simple nav, real content in plain styling, mobile-friendly. No theming or animation yet.
+3. ✅ Hero: the transit map and "Pick your route" interaction, including the resume switching.
 4. Chapters, one at a time: xG (Matchday) → Data Cleaning Pipeline (Clean run) → ShelfLife (Blueprint) → Research (Lab notebook)
 5. Transitions between chapters
 6. Fill in and style Experience, About, Resume, and Contact
@@ -155,8 +179,11 @@ Badminton, football (soccer) analytics, biking, exploring new music.
 
 ## Current status
 
-- Step 1 is done.
-- Step 2 (skeleton) is done. Sections live in `src/components/`, project chapters in `src/components/chapters/`, and shared links (contact info, resume paths) in `src/data/links.js`. Plain styling in `src/index.css`.
-- All three resume PDFs are in `public/resumes/`.
-- Sentiment Analysis Classifier appears as a one-line "Earlier project" in About (no link).
-- Next up: Step 3 (Hero: transit map and "Pick your route").
+- Steps 1 and 2 are done, and the skeleton is committed.
+- Step 3 is done (simple fade/slide transition only; the full ride-along animation is still to come).
+  - Map: `src/components/TransitMap.jsx` (a wide version, plus a tall version for phones under 640px).
+  - Line page: `src/components/LinePage.jsx`.
+  - Which stops are on which line, and each stop's subtitle: `src/data/lines.js`. Transfers are worked out automatically (a stop on two or more of B/C/D).
+  - The boarded line is in the URL (`#line-b` to `#line-e`). Clicking a stop jumps to its section and keeps the line boarded. "Back to map" or Home returns to the map.
+  - The bottom Resume button switches to the boarded line's version, or offers a menu of all three when no line is boarded (or on E).
+- Next up: Step 4, starting with the xG chapter (Matchday).
