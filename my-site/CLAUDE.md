@@ -140,20 +140,55 @@ Badminton, football (soccer) analytics, biking, exploring new music.
 - Along the bottom, always visible: GitHub, LinkedIn, and Email as pill buttons, plus a filled navy Resume button.
 - On phones, the map turns vertical, with the journey on top, Northeastern in the middle, and the branches dropping downward.
 
+### Site structure (approved): station directory + world pages
+
+The site has three kinds of pages. Use `react-router-dom` for the routes (this is an approved new package).
+
+**1. Home page (`/`): calm, navy-and-white only**
+- The hero (as approved above): name, pitch, the transit map with clickable lines, and the link buttons.
+- Below the hero, a **"Stations" directory**: a heading "Stations" with a small "4 projects · click to enter" label, then a grid of **station cards** (2 columns on desktop, 1 on phones):
+  - Each card is white with a light border (`#e1e4ea`) and rounded corners (about 12px). It lifts slightly and its border turns navy on hover (no lift with reduced motion).
+  - **The top of each card is a small preview (about 92px tall) of that project's world.** xG shows a mini dark-green pitch with a few dots and the "● LIVE 72'" clock. The pipeline shows cream paper with struck-out messy rows → "✓ clean." ShelfLife shows a blueprint-blue grid with three linked table boxes. Research shows graph paper with two small paper cards.
+  - Below the preview: the lines it's on (for example "lines D · C," green monospace), a tag on the right (In progress / Course project / Team of 5 / Independent), the project title (navy), and a one-sentence description.
+  - Clicking a card opens that world page.
+- Below the stations: Experience, About, Resume, and Contact, in the navy-and-white style.
+- **No full-size themed worlds appear on the home page.** The previews on the cards are the only themed elements.
+
+**2. Line pages (`/line/b`, `/line/c`, `/line/d`, `/line/e`)**
+- As described in "Boarding a line" above.
+
+**3. World pages (`/xg`, `/pipeline`, `/shelflife`, `/research`)**
+- **A sticky navy top bar** (`#1F3864`) with a back button. If the visitor came from a line, it says "← Back to D line" (or whichever line) and returns there. Otherwise, it says "← Back to stations" and returns to the home page. On the right, a small label: "lines D · C."
+- Then the project's full themed world (the Matchday chapter for xG, and so on). The world fills the page width.
+- At the bottom, a navy **"Next stop" sign** with the line's letter badge. If the visitor came from a line, it goes to the next stop on that line ("next stop on the D line"). Otherwise, it follows the E line order: xG → Pipeline → ShelfLife → Research. There's no sign on the last stop.
+- Track the line the visitor came from with a query param or router state (for example `/xg?line=d`), so it survives a refresh.
+
+**Direct links:** Every page needs to work when someone opens its link directly or refreshes it. Add a `vercel.json` with a rewrite that sends all routes to `index.html`, so Vercel doesn't show a 404.
+
+**Nav:** Keep a simple, always-available way to get Home, Stations, Experience, About, Resume, and Contact. Style it navy-and-white to match the frame (replace the default blue underlined links).
+
+### Color rule (keeps the motifs from clashing)
+
+- **The frame** is navy `#1F3864`, white, light gray `#f7f8fa`, and transit green `#1a7f4b`. That covers the hero, map, nav, station cards, line pages, navy bars, next-stop signs, Experience, About, Resume, and Contact.
+- **Each world's palette** stays inside its world page (and its card preview). It never leaks into the frame.
+- The xG world uses a deep shade of the transit green, so the two greens look related instead of nearly matching.
+
 ### Boarding a line ("Pick your route")
 
-- Clicking a branch (the line, its label, or its badge) "boards" that line. The view moves along the branch into a line page specialized for that career type. (Do the full animation in a later step. For now, a simple transition is fine.)
+- Clicking a branch (the line, its label, or its badge) "boards" that line and opens its line page (`/line/b`, `/line/c`, `/line/d`, `/line/e`). Make the clickable area generous (an invisible, wider stroke over each branch) so the lines are easy to hit. (Fancy boarding animation comes later. For now, a simple switch is fine.)
 - The line page shows:
   - A header with the letter badge, the line name, and "X stops from Northeastern."
   - A vertical green line with the projects as stops, top to bottom. Each stop has a name and a short subtitle.
   - **Transfer stations:** projects that appear on more than one line get a bigger dot and a "transfer" tag.
-  - A "← Back to map" button and a resume button that matches the line.
+  - A "Coursework on this line" panel beside the stops on desktop (below them on phones). See below.
+  - A resume button that matches the line.
+  - The navy top bar with "← Back to map" (see Site structure).
 - The stops on each line (first draft):
   - **B, Business Analytics:** ShelfLife (transfer) · Data Cleaning Pipeline (transfer) · El Salvador research · My Creative Factory · Knack → **Econ** resume
   - **C, Comp Bio:** Enzyme experiment · Data Cleaning Pipeline (transfer) · xG model (transfer) → **Bio** resume
   - **D, Data / ML:** xG model (transfer) · Data Cleaning Pipeline (transfer) · ShelfLife (transfer) → **CS** resume
   - **E, All stops:** every project. The resume button lets you choose any of the three versions.
-- Clicking a stop opens that project's chapter (see below).
+- Clicking a stop opens that project's world page, remembering which line you came from (see Site structure).
 
 ### Coursework on each line
 
@@ -168,20 +203,18 @@ Each line page also has a **"Coursework on this line"** panel, styled like a sta
 
 - The C line header shows a subtitle: "B.S. in Data Science & Business · Minor in Biology." The C line's intro text should explain how I connect data science with biology.
 - The minor should also appear wherever my degree is listed (the About or Education section) and in the hero tooltip or caption if there's room.
-- The line choice should be in the URL hash (for example `#line-d`), so I can send a recruiter a link straight to the D line.
 
-### Project chapters (later steps)
+### Project worlds
 
-Each project gets its own visual world when you open its stop:
+Each project has its own world page with its own visual theme:
 - **xG Modeling → "Matchday":** dark pitch-green, chalk pitch lines, shots plotted and colored by xG
 - **Data Cleaning Pipeline → "Clean run":** cream paper and monospace text. Messy rows get struck out and come out clean.
 - **ShelfLife → "Blueprint":** an ER diagram of my actual schema, with foreign-key lines drawing themselves in
 - **Research (El Salvador, enzyme) → "Lab notebook":** graph paper, serif type, annotated pages
-- After the projects, Experience, About, Resume, and Contact go back to the calm navy-and-white style.
 
 ### xG chapter ("Matchday"), approved design (v2)
 
-- **Colors:** background `#0f2a1d` (dark pitch green), pitch `#123321`, chalk lines `#eaf3de` at about 30% opacity, text `#eaf3de`, secondary text `#c0dd97`, small labels `#97c459`, muted/upcoming `#5e7d68`. Amber `#fac775` for highlights (text on `#3a3410` for pills). Live red `#e24b4a`.
+- **Colors:** background `#0d3a24` (deep transit green), pitch `#114a2e`, chalk lines `#eaf3de` at about 30% opacity, text `#eaf3de`, secondary text `#c0dd97`, small labels `#97c459`, muted/upcoming `#5e7d68`. Amber `#fac775` for highlights (text on `#3a3410` for pills). Live red `#e24b4a`.
 - **Header:** a small monospace label showing which lines this stop is on (D line · C line transfer), the title "xG Modeling in Football," the amber "In progress" pill, a one-sentence description in formal, complete sentences, and a meta line (Solo project · Jul 2026 to present · Python, pandas, scikit-learn).
 
 **Shot map (left column on desktop, stacked on phones):**
@@ -220,13 +253,18 @@ Each project gets its own visual world when you open its stop:
 
 ## Build plan (one step at a time)
 
-1. ✅ Lock the concept and hook (done in the design chat)
-2. ✅ Skeleton: one component per section (Hero, each project chapter, Experience, About, Resume, Contact), a simple nav, real content in plain styling, mobile-friendly. No theming or animation yet.
-3. ✅ Hero: the transit map and "Pick your route" interaction, including the resume switching.
-4. Chapters, one at a time (xG design approved, real data pending): xG (Matchday) → Data Cleaning Pipeline (Clean run) → ShelfLife (Blueprint) → Research (Lab notebook)
-5. Transitions between chapters
-6. Fill in and style Experience, About, Resume, and Contact
-7. Polish: mobile, load speed, accessibility, reduced motion
+Get everything working and complete first. Fancy animations come last.
+
+1. ✅ Lock the concept and hook
+2. ✅ Skeleton
+3. ✅ Hero: the transit map and "Pick your route"
+4. ✅ xG world, v2 design (placeholder data)
+5. **Restructure:** routing, the home page with the Stations directory and preview cards, line pages, world pages with the navy bar and next-stop sign, `vercel.json`, and nav styling. Move the existing xG chapter onto `/xg`. Other worlds can be plain placeholder pages for now.
+6. Experience, About, Resume, and Contact: content and navy-and-white styling
+7. The remaining worlds (each designed in the design chat first): Data Cleaning Pipeline ("Clean run") → ShelfLife ("Blueprint") → Research ("Lab notebook")
+8. Swap in real assets as they arrive (see "Waiting on Madhav")
+9. Make it fancy: card-to-page expand animation, line boarding animation, other motion (always respecting reduced motion)
+10. Polish: mobile, load speed, accessibility, typography, final proofread
 
 ## Waiting on Madhav (assets to add later)
 
@@ -246,7 +284,13 @@ Leave clear placeholders for these until I provide them. Never fill them with ma
 
 ## Current status
 
-- Steps 1 to 3 are done, and the first version of the xG chapter is built.
-- The xG chapter is updated to the v2 design. Everything it shows is in `src/data/xg.js`: the shots (mark one with `featured: true` for the angle and distance annotation), the match report values, the links, and the five stages. Change `stagesCompleted` (now 3) as work finishes; the clock, progress bar, and rows update from it. At 5, the clock shows 90', LIVE becomes "Full time," and the "In progress" pill disappears.
-- Clock rule as built: while a stage is in progress, the clock shows that stage's end minute (3 done + Modeling in progress = 72'), matching the approved mockup. Confirm or change.
-- After that: design the Data Cleaning Pipeline ("Clean run") chapter in the design chat.
+- Steps 1 to 4 are done.
+- Step 5 (restructure) is done.
+  - Routes: `/` (hero + Stations + Experience/About/Resume/Contact), `/line/b` to `/line/e`, and the worlds `/xg`, `/pipeline`, `/shelflife`, `/research`. Page files are in `src/pages/`. Unknown addresses show a "This stop doesn't exist" page.
+  - `vercel.json` sends every route to `index.html`, so direct links and refreshes work on Vercel.
+  - The line a visitor came from is kept as `?line=d` in the address. Invalid or unrelated lines are ignored (the page falls back to "Back to stations" and E line order).
+  - Station cards and world info (title, tag, one-sentence description) are in `src/data/worlds.js`. Stop links and the line labels are worked out from `src/data/lines.js`.
+  - Next stop on a line can be a non-world stop (on the B line, Research → My Creative Factory, which opens Experience on the home page).
+  - Old `/#line-d` links redirect to `/line/d`.
+  - Pipeline, ShelfLife, and Research worlds are placeholders that show the existing plain content with a "full design is coming soon" note.
+- Next: Step 6 (Experience, About, Resume, Contact).

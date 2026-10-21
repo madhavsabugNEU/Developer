@@ -4,7 +4,7 @@ import ExternalLink from '../ExternalLink.jsx'
 export default function PipelineChapter() {
   return (
     <section id="pipeline" className="section">
-      <h2>Data Cleaning Pipeline</h2>
+      <h1>Data Cleaning Pipeline</h1>
       <p className="meta">
         Course project (DS 3500), built from an assignment specification · Fall 2026
       </p>

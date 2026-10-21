@@ -2,10 +2,10 @@
 export default function ResearchChapter() {
   return (
     <section id="research" className="section">
-      <h2>Research</h2>
+      <h1>Research</h1>
 
       <article id="el-salvador">
-        <h3>Economic Impact of El Salvador's Gang Crackdown</h3>
+        <h2>Economic Impact of El Salvador's Gang Crackdown</h2>
         <p className="meta">Independent research · Mar to Nov 2024</p>
         <p>
           I wrote a 4,000-word research paper analyzing up to 23 years of World
@@ -22,7 +22,7 @@ export default function ResearchChapter() {
       </article>
 
       <article id="enzyme">
-        <h3>Enzyme Activity Experiment</h3>
+        <h2>Enzyme Activity Experiment</h2>
         <p className="meta">Independent lab research · High school</p>
         <p>
           I ran a 30-trial experiment on how salinity affects trypsin activity.

@@ -1,8 +1,12 @@
-/* Plain skeleton styles: readable and mobile-friendly. Theming comes later. */
+/* The frame: navy, white, light gray, and transit green (see "Color rule"
+   in CLAUDE.md). Each world's own colors stay inside its world styles below. */
 
 :root {
   --green: #1a7f4b;
   --navy: #1f3864;
+  --gray: #f7f8fa;
+  --border: #e1e4ea;
+  --nav-h: 3rem;
   --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 }
 
@@ -13,7 +17,7 @@
 }
 
 html {
-  scroll-padding-top: 5rem; /* keeps headings from hiding under the nav */
+  scroll-padding-top: 7rem; /* keeps headings from hiding under the nav and top bar */
 }
 
 body {
@@ -28,22 +32,65 @@ main {
   padding-bottom: 4rem;
 }
 
+a {
+  color: var(--navy);
+}
+
+/* ---------- Site nav ---------- */
+
 .site-nav {
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 10;
+  height: var(--nav-h);
   background: #fff;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--border);
+}
+
+.site-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 72rem;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.site-nav-name {
+  flex: none;
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
 }
 
 .site-nav ul {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1rem;
-  max-width: 44rem;
-  margin: 0 auto;
-  padding: 0.75rem 1rem;
+  gap: 1.25rem;
+  margin: 0 0 0 auto;
+  padding: 0;
   list-style: none;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.site-nav ul a {
+  display: block;
+  padding: 0.25rem 0;
+  color: var(--navy);
+  font-size: 0.92rem;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.site-nav ul a:hover,
+.site-nav ul a:focus-visible {
+  border-bottom-color: var(--green);
+}
+
+.site-nav-name:hover {
+  color: var(--green);
 }
 
 .section {
@@ -85,15 +132,358 @@ article + article {
   border: 0;
 }
 
-/* ---------- Phones: keep the section menu to one scrolling row ---------- */
-
+/* Phones: the menu stays one row and scrolls sideways. */
 @media (max-width: 640px) {
-  .site-nav ul {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 0.6rem 1rem;
+  .site-nav-inner {
+    gap: 1rem;
   }
+  .site-nav ul {
+    gap: 1rem;
+    margin-left: 0;
+  }
+}
+
+/* ---------- Navy top bar (line and world pages) ---------- */
+
+.top-bar {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 9;
+  background: var(--navy);
+  color: #fff;
+}
+
+.top-bar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0.6rem 1rem;
+}
+
+.top-bar-back {
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.top-bar-back:hover,
+.top-bar-back:focus-visible {
+  text-decoration: underline;
+}
+
+.top-bar-label {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: #c9d3e6;
+}
+
+/* ---------- Next stop sign (bottom of world pages) ---------- */
+
+.next-stop {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2.5rem 1rem 3rem;
+}
+
+.next-stop-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  background: var(--navy);
+  color: #fff;
+  text-decoration: none;
+}
+
+.next-stop-inner:hover .next-stop-name,
+.next-stop-inner:focus-visible .next-stop-name {
+  text-decoration: underline;
+}
+
+.next-stop-text {
+  flex: 1;
+}
+
+.next-stop-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c9d3e6;
+}
+
+.next-stop-name {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.next-stop-arrow {
+  font-size: 1.5rem;
+}
+
+/* ---------- World pages ---------- */
+
+.world {
+  padding-bottom: 0;
+}
+
+.world-placeholder {
+  padding: 1.5rem 0 1rem;
+}
+
+.world-placeholder-note {
+  width: calc(100% - 2rem);
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  border: 1.5px dashed var(--border);
+  border-radius: 0.5rem;
+  background: var(--gray);
+  color: #444;
+  font-size: 0.92rem;
+}
+
+.world-placeholder .section {
+  border-bottom: 0;
+}
+
+.not-found {
+  min-height: 50vh;
+}
+
+.not-found h1 {
+  color: var(--navy);
+}
+
+/* ---------- Stations directory (home page) ---------- */
+
+.section.stations {
+  max-width: 72rem;
+}
+
+.stations-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.stations-head h2 {
+  margin: 0;
+  color: var(--navy);
+}
+
+.stations-count {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--green);
+}
+
+.station-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 700px) {
+  .station-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.station-card {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.station-card:hover,
+.station-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--navy);
+  box-shadow: 0 6px 16px rgb(31 56 100 / 0.1);
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .station-card {
+    transition: none;
+  }
+  .station-card:hover,
+  .station-card:focus-visible {
+    transform: none;
+  }
+}
+
+.station-preview {
+  height: 92px;
+  overflow: hidden;
+}
+
+.station-body {
+  padding: 0.85rem 1rem 1rem;
+}
+
+.station-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.station-lines {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--green);
+}
+
+.station-tag {
+  padding: 0.05rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--gray);
+  font-size: 0.75rem;
+  color: var(--navy);
+  white-space: nowrap;
+}
+
+.station-title {
+  margin: 0.35rem 0 0.2rem;
+  font-size: 1.15rem;
+  color: var(--navy);
+}
+
+.station-desc {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #444;
+}
+
+/* Card previews: each one uses its own world's colors. */
+.pv {
+  position: relative;
+  height: 100%;
+}
+
+.pv svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.pv-xg-clock {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.6rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 0.3rem;
+  background: rgb(13 58 36 / 0.85);
+  color: #eaf3de;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.pv-live {
+  color: #e24b4a;
+}
+
+.pv-pipeline {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1rem;
+  background: #f6efdc;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: #5b4a2e;
+}
+
+.pv-rows {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.pv-struck {
+  text-decoration: line-through;
+  text-decoration-color: #c0392b;
+  opacity: 0.75;
+}
+
+.pv-arrow {
+  font-size: 1rem;
+}
+
+.pv-clean {
+  padding: 0.15rem 0.5rem;
+  border: 1px solid #6b8f3a;
+  border-radius: 0.3rem;
+  color: #4b6b23;
+  font-weight: 700;
+}
+
+.pv-research {
+  background-color: #fbfcfd;
+  background-image:
+    linear-gradient(rgb(70 120 180 / 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(70 120 180 / 0.14) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+.pv-paper {
+  position: absolute;
+  top: 14px;
+  display: grid;
+  gap: 5px;
+  width: 84px;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #d6d9de;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.08);
+}
+
+.pv-paper span {
+  height: 3px;
+  background: #c7ccd4;
+}
+
+.pv-paper .pv-paper-title {
+  height: 5px;
+  width: 70%;
+  background: #6b7380;
+}
+
+.pv-paper .short {
+  width: 55%;
+}
+
+.pv-paper-a {
+  left: 22%;
+  transform: rotate(-4deg);
+}
+
+.pv-paper-b {
+  left: 52%;
+  top: 22px;
+  transform: rotate(3deg);
 }
 
 /* ---------- Hero ---------- */
@@ -122,29 +512,6 @@ article + article {
   font-family: var(--mono);
   font-size: 0.85rem;
   color: var(--green);
-}
-
-/* Simple fade/slide when switching between map and line page.
-   The full "ride along the branch" animation comes in a later step. */
-.hero-view {
-  animation: view-in 250ms ease-out;
-}
-
-@keyframes view-in {
-  from {
-    opacity: 0;
-    transform: translateX(1.5rem);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-view {
-    animation: none;
-  }
 }
 
 .hero-links {
@@ -345,11 +712,13 @@ article + article {
 /* ---------- Line page ---------- */
 
 .line-page {
-  margin-top: 1.25rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0.5rem 1rem 4rem;
 }
 
-.back-btn {
-  font-size: 0.9rem;
+.line-page .hero-links {
+  margin: 0 0 1.5rem;
 }
 
 .line-header {
@@ -372,12 +741,13 @@ article + article {
   font-weight: 700;
 }
 
-.line-header h2 {
+.line-header h1 {
   margin: 0;
+  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
   color: var(--navy);
 }
 
-.line-header h2:focus {
+.line-header h1:focus {
   outline: none;
 }
 
@@ -512,7 +882,7 @@ article + article {
   overflow: hidden;
 }
 
-.timetable h3 {
+.timetable h2 {
   margin: 0;
   padding: 0.5rem 0.85rem;
   background: var(--navy);
@@ -558,8 +928,8 @@ article + article {
 /* ---------- xG chapter: "Matchday" ---------- */
 
 .matchday {
-  --pitch-bg: #0f2a1d;
-  --pitch: #123321;
+  --pitch-bg: #0d3a24;
+  --pitch: #114a2e;
   --chalk: #eaf3de;
   --chalk-2: #c0dd97;
   --chalk-3: #97c459;
@@ -589,7 +959,7 @@ article + article {
   color: var(--chalk-3);
 }
 
-.matchday h2 {
+.matchday h1 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -732,7 +1102,7 @@ article + article {
   flex: 1 1 13rem;
 }
 
-.shot-explainer h3 {
+.shot-explainer h2 {
   margin: 0 0 0.4rem;
   font-size: 1.05rem;
 }
@@ -772,10 +1142,10 @@ article + article {
   padding: 1.25rem 1.25rem 1.4rem;
   border: 1px solid rgb(234 243 222 / 0.2);
   border-radius: 0.6rem;
-  background: rgb(18 51 33 / 0.7);
+  background: rgb(17 74 46 / 0.7);
 }
 
-.match-report h3 {
+.match-report h2 {
   margin: 0 0 0.5rem;
   font-family: var(--mono);
   font-size: 0.8rem;
@@ -849,7 +1219,7 @@ article + article {
   padding: 1.25rem 1.25rem 0.5rem;
   border: 1px solid rgb(234 243 222 / 0.2);
   border-radius: 0.6rem;
-  background: rgb(18 51 33 / 0.7);
+  background: rgb(17 74 46 / 0.7);
 }
 
 .commentary-top {
@@ -860,7 +1230,7 @@ article + article {
   gap: 0.5rem 1rem;
 }
 
-.commentary-top h3 {
+.commentary-top h2 {
   margin: 0;
   font-family: var(--mono);
   font-size: 0.8rem;

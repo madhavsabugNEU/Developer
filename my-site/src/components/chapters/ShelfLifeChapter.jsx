@@ -4,7 +4,7 @@ import ExternalLink from '../ExternalLink.jsx'
 export default function ShelfLifeChapter() {
   return (
     <section id="shelflife" className="section">
-      <h2>ShelfLife</h2>
+      <h1>ShelfLife</h1>
       <p className="meta">
         Team project (five people) · CS 3200 Database Design course project · Jan to Apr 2026
       </p>
@@ -14,7 +14,7 @@ export default function ShelfLifeChapter() {
         with separate roles for buyers, sellers, data analysts, and admins. My
         team of five built it for CS 3200 (Database Design).
       </p>
-      <h3>My contributions</h3>
+      <h2>My contributions</h2>
       <ul>
         <li>I designed the relational schema, including the linked tables and foreign keys.</li>
         <li>I generated mock data for testing.</li>

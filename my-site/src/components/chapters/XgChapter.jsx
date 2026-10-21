@@ -9,10 +9,11 @@ import {
   xgLinks,
   stages,
   stagesCompleted,
+  allStagesDone,
+  clockMinute,
 } from '../../data/xg.js'
 
 // Chapter theme: "Matchday". All numbers, shots, and stages come from src/data/xg.js.
-const allStagesDone = stagesCompleted >= stages.length
 
 export default function XgChapter() {
   return (
@@ -20,10 +21,10 @@ export default function XgChapter() {
       <div className="matchday-inner">
         <header className="matchday-header">
           <p className="matchday-lines">{lineLabel('xg')}</p>
-          <h2 id="xg-title">
+          <h1 id="xg-title">
             xG Modeling in Football
             {!allStagesDone && <span className="pill-progress">In progress</span>}
-          </h2>
+          </h1>
           <p className="matchday-intro">
             I am building an expected goals (xG) model that estimates the
             probability of a shot becoming a goal from its location, angle, and
@@ -150,7 +151,7 @@ function ShotMap() {
       </figure>
 
       <div className="shot-explainer">
-        <h3>How xG reads a shot</h3>
+        <h2>How xG reads a shot</h2>
         <p>
           Expected goals (xG) is the probability that a shot becomes a goal. It
           depends mostly on two things: how much of the goal the shooter can
@@ -247,7 +248,7 @@ function FeaturedAnnotation({ shot, part }) {
 function MatchReport() {
   return (
     <aside className="match-report" aria-labelledby="match-report-title">
-      <h3 id="match-report-title">Match report</h3>
+      <h2 id="match-report-title">Match report</h2>
       <dl>
         {matchReport.map((row) => (
           <div key={row.label} className="report-row">
@@ -279,15 +280,15 @@ function MatchReport() {
 
 /* ---------- Live commentary (project progress) ---------- */
 
-const MINUTES_PER_STAGE = 90 / 5
+const MINUTES_PER_STAGE = 90 / stages.length
 
 function LiveCommentary() {
-  const clock = allStagesDone ? 90 : (stagesCompleted + 1) * MINUTES_PER_STAGE
+  const clock = clockMinute
 
   return (
     <section className="commentary" aria-labelledby="commentary-title">
       <div className="commentary-top">
-        <h3 id="commentary-title">Project progress</h3>
+        <h2 id="commentary-title">Project progress</h2>
         <p className="commentary-clock">
           {allStagesDone ? (
             <span className="tag-fulltime">Full time</span>

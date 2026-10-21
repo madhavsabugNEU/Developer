@@ -82,3 +82,7 @@ export const stages = [
   { name: 'Modeling', detail: 'Building and iterating on a classifier in scikit-learn.' },
   { name: 'Evaluation', detail: 'Testing against held-out data and a distance-only baseline.' },
 ]
+
+// Worked out from the stages above; used by the chapter and the station card.
+export const allStagesDone = stagesCompleted >= stages.length
+export const clockMinute = allStagesDone ? 90 : (stagesCompleted + 1) * (90 / stages.length)

@@ -1,42 +1,56 @@
-// Stops and lines for the hero map. Edit here to change which projects
-// appear on which line. `href` points at the matching section further down.
+// Stops and lines for the hero map and line pages. Edit here to change which
+// projects appear on which line.
+// world: the world page the stop opens (see src/data/worlds.js).
+// anchor: a spot on that page (or on the home page, if there's no world).
 
 export const stops = {
   xg: {
     name: 'xG Modeling in Football',
     subtitle: 'In progress · ML model that predicts goal probability',
-    href: '#xg',
+    world: 'xg',
   },
   pipeline: {
     name: 'Data Cleaning Pipeline',
     subtitle: 'Course project · Configurable command-line cleaning tool',
-    href: '#pipeline',
+    world: 'pipeline',
   },
   shelflife: {
     name: 'ShelfLife',
     subtitle: 'Team project · Database design for a course materials marketplace',
-    href: '#shelflife',
+    world: 'shelflife',
   },
   elsalvador: {
     name: "El Salvador's Gang Crackdown",
     subtitle: 'Independent research · Up to 23 years of economic data',
-    href: '#el-salvador',
+    world: 'research',
+    anchor: 'el-salvador',
   },
   enzyme: {
     name: 'Enzyme Activity Experiment',
     subtitle: 'Independent lab research · 30-trial salinity experiment',
-    href: '#enzyme',
+    world: 'research',
+    anchor: 'enzyme',
   },
   creativefactory: {
     name: 'My Creative Factory',
     subtitle: 'Internship · Product & client management, Singapore',
-    href: '#creative-factory',
+    anchor: 'creative-factory',
   },
   knack: {
     name: 'Knack',
     subtitle: 'Peer tutor · Financial accounting and Excel',
-    href: '#knack',
+    anchor: 'knack',
   },
+}
+
+// Where a stop's link goes. Coming from a line, world pages get ?line=x so
+// the back button and next-stop sign remember it (and survive a refresh).
+export function stopLink(stopId, letter) {
+  const stop = stops[stopId]
+  const hash = stop.anchor ? `#${stop.anchor}` : ''
+  if (!stop.world) return `/${hash}`
+  const query = letter ? `?line=${letter.toLowerCase()}` : ''
+  return `/${stop.world}${query}${hash}`
 }
 
 // All coursework. `ib: true` marks IB transfer credit.
@@ -113,6 +127,17 @@ export function isTransfer(stopId) {
   return count > 1
 }
 
+// Accepts 'd' or 'D'. Returns null for anything that isn't a line.
 export function findLine(letter) {
-  return lines.find((line) => line.letter === letter) ?? null
+  if (!letter) return null
+  return lines.find((line) => line.letter === letter.toUpperCase()) ?? null
+}
+
+// "D · C" for the lines (not counting E) that include any of these stops.
+export function linesLabel(stopIds) {
+  return lines
+    .filter((line) => line.letter !== 'E' && stopIds.some((id) => line.stops.includes(id)))
+    .map((line) => line.letter)
+    .reverse()
+    .join(' · ')
 }

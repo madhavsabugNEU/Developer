@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { lines } from '../data/lines.js'
 
 // The hero map. Drawn twice: a wide version for computers and a tall
@@ -16,8 +17,8 @@ export default function TransitMap() {
 
 function BranchLink({ line, path, children }) {
   return (
-    <a
-      href={`#line-${line.letter.toLowerCase()}`}
+    <Link
+      to={`/line/${line.letter.toLowerCase()}`}
       className="branch"
       aria-label={`Board the ${line.letter} line: ${line.name}, ${line.stops.length} stops`}
     >
@@ -25,7 +26,7 @@ function BranchLink({ line, path, children }) {
       <path d={path} className="branch-hit" />
       <path d={path} className="branch-line" />
       {children}
-    </a>
+    </Link>
   )
 }
 

@@ -1,29 +1,28 @@
+import { Routes, Route } from 'react-router-dom'
 import Nav from './components/Nav.jsx'
-import Hero from './components/Hero.jsx'
-import XgChapter from './components/chapters/XgChapter.jsx'
-import PipelineChapter from './components/chapters/PipelineChapter.jsx'
-import ShelfLifeChapter from './components/chapters/ShelfLifeChapter.jsx'
-import ResearchChapter from './components/chapters/ResearchChapter.jsx'
-import Experience from './components/Experience.jsx'
-import About from './components/About.jsx'
-import Resume from './components/Resume.jsx'
-import Contact from './components/Contact.jsx'
+import ScrollManager from './components/ScrollManager.jsx'
+import HomePage from './pages/HomePage.jsx'
+import LinePage from './pages/LinePage.jsx'
+import XgPage from './pages/XgPage.jsx'
+import PipelinePage from './pages/PipelinePage.jsx'
+import ShelfLifePage from './pages/ShelfLifePage.jsx'
+import ResearchPage from './pages/ResearchPage.jsx'
+import NotFoundPage from './pages/NotFoundPage.jsx'
 
 function App() {
   return (
     <>
+      <ScrollManager />
       <Nav />
-      <Hero />
-      <main>
-        <XgChapter />
-        <PipelineChapter />
-        <ShelfLifeChapter />
-        <ResearchChapter />
-        <Experience />
-        <About />
-        <Resume />
-        <Contact />
-      </main>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/line/:letter" element={<LinePage />} />
+        <Route path="/xg" element={<XgPage />} />
+        <Route path="/pipeline" element={<PipelinePage />} />
+        <Route path="/shelflife" element={<ShelfLifePage />} />
+        <Route path="/research" element={<ResearchPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </>
   )
 }
