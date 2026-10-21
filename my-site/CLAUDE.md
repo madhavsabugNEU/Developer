@@ -37,8 +37,7 @@ If anything in this file conflicts with a request, ask before acting.
 - GPA 3.74/4.0. Dean's List (Fall 2025, Spring 2026).
 - Grew up in India, Dubai (lived there 5 years), and Singapore. Attended UWC South East Asia in Singapore (IB Diploma).
 - Pitch: I combine data science with business thinking to turn messy data into reliable insights and tools.
-- Contact: madhavsabug@gmail.com · linkedin.com/in/madhavsabu/ · github.com/madhavsabugNEU
-- Don't write my phone number into the site's pages. It's fine for it to appear in the resume PDFs.
+- Contact: madhavsabug@gmail.com · (617) 505-2098 · linkedin.com/in/madhavsabu/ · github.com/madhavsabugNEU
 
 ## Skills (list only these)
 
@@ -76,6 +75,7 @@ IB transfer credit: General Biology 1 and 2, Principles of Macroeconomics and Mi
    - 4,000-word research paper analyzing up to 23 years of World Bank, IMF, ILO, and CEPAL data across 4 indicators (GDP growth, foreign investment, unemployment, wellbeing).
    - Finding: reported economic gains couldn't be attributed to the policy, partly because of misleading statistics (for example, unemployment fell partly because mass arrests shrank the labor force).
    - Frame it as independent research. Never call it published or college research.
+   - I'll add the paper as a PDF later (it will go in `public/papers/`). Until then, leave a placeholder for the link.
 
 5. **Enzyme Activity Experiment** (independent lab research, high school)
    - 30-trial experiment on how salinity affects trypsin activity, measured with a colorimeter and analyzed with standard deviation and Pearson correlation (r = −0.43, a weak negative correlation).
@@ -98,6 +98,14 @@ Smith and Kennedy Hall Vice President · Kappa Theta Pi (Technology Fraternity) 
 ## Interests
 
 Badminton, football (soccer) analytics, biking, exploring new music.
+
+## Writing style (apply to all site content)
+
+- Write in a polished, professional tone with correct grammar and punctuation.
+- Project and experience descriptions use complete sentences, not fragments. Short labels (stop subtitles, tags, buttons) can stay brief.
+- Avoid slang and filler. Keep it confident but not boastful.
+- Use consistent tense: present tense for ongoing work (xG, Electric Racing), past tense for finished work.
+- Proofread all existing copy against these rules whenever you touch a section.
 
 ## Honesty rules (apply to all site content)
 
@@ -146,6 +154,20 @@ Badminton, football (soccer) analytics, biking, exploring new music.
   - **D, Data / ML:** xG model (transfer) · Data Cleaning Pipeline (transfer) · ShelfLife (transfer) → **CS** resume
   - **E, All stops:** every project. The resume button lets you choose any of the three versions.
 - Clicking a stop opens that project's chapter (see below).
+
+### Coursework on each line
+
+Each line page also has a **"Coursework on this line"** panel, styled like a station timetable (a clean list or table in the transit style). Mark IB transfer credit clearly as "(IB credit)".
+
+- **B, Business Analytics:** Financial Accounting & Reporting · Financial Management · Introduction to Marketing · Programming with Consumer Data · Introduction to Databases · Information Presentation and Visualization · Principles of Macroeconomics (IB credit) · Principles of Microeconomics (IB credit)
+- **C, Comp Bio:** General Biology 1 (IB credit) · General Biology 2 (IB credit) · Foundations of Data Science · Intermediate Programming with Data · Advanced Programming with Data · Introduction to Databases
+- **D, Data / ML:** Discrete Structures · Foundations of Data Science · Intermediate Programming with Data · Advanced Programming with Data · Introduction to Databases · Information Presentation and Visualization
+- **E, All stops:** all coursework, including Buildings and Cities
+
+### The Biology minor
+
+- The C line header shows a subtitle: "B.S. in Data Science & Business · Minor in Biology." The C line's intro text should explain how I connect data science with biology.
+- The minor should also appear wherever my degree is listed (the About or Education section) and in the hero tooltip or caption if there's room.
 - The line choice should be in the URL hash (for example `#line-d`), so I can send a recruiter a link straight to the D line.
 
 ### Project chapters (later steps)
@@ -157,13 +179,24 @@ Each project gets its own visual world when you open its stop:
 - **Research (El Salvador, enzyme) → "Lab notebook":** graph paper, serif type, annotated pages
 - After the projects, Experience, About, Resume, and Contact go back to the calm navy-and-white style.
 
+### xG chapter ("Matchday"), approved mockup
+
+- **Colors:** background `#0f2a1d` (dark pitch green), pitch `#123321`, chalk lines `#eaf3de` at about 35% opacity, text `#eaf3de`, secondary text `#c0dd97`, small labels `#97c459`. The "In progress" pill is amber (`#fac775` text on `#3a3410`).
+- **Header:** a small monospace label showing which lines this stop is on (D line, C line transfer), the title "xG Modeling in Football," the amber "In progress" pill, and a one-sentence description in complete, formal sentences.
+- **Two columns on desktop (stacked on phones):**
+  - **Left, shot map:** a half-pitch drawn in SVG with the goal on the right. Shots are circles sized and colored by xG, on a scale from dark green (low) through light green to amber (high), with a legend underneath. Hovering or tapping a shot shows its details in a line below the map.
+    - **For now,** use clearly labeled placeholder shots, with the caption "illustrative shots · placeholder data." Keep the data in a separate file (for example `src/data/xgShots.js` or a JSON file) so I can swap in my real CSV later without touching the component.
+  - **Right, "match report" panel:** stat rows for Shots in dataset, Goals (base rate), Competitions · seasons, Features, Model, Test log loss, and vs. distance-only baseline. Every value shows "—" until I provide real numbers. Keep these values in the same data file. Under the stats, a dashed placeholder note ("Results appear here once the model is evaluated.") and pill links to the GitHub repo and the notebook (the notebook link is a placeholder for now).
+- **"How it works" strip:** five steps: Collect → Clean → Engineer → Model → Evaluate. Evaluate is styled as dashed or "up next" until results exist.
+- **Motion:** none required yet. Keep it static and fast.
+
 ### Guardrails
 
 - A simple nav to jump to any section must always be available.
 - Motion is optional. Respect `prefers-reduced-motion`, and make sure every chapter has a clean, static version that works on phones. Content never depends on animation.
 - Fast-loading. No heavy libraries unless really needed.
 - Typography: a clean sans-serif for now (to be refined in polish). Monospace for small transit-style labels.
-- Resume PDFs go in `public/resumes/` as `Madhav-Sabu-Resume-CS.pdf`, `Madhav-Sabu-Resume-Econ.pdf`, and `Madhav-Sabu-Resume-Bio.pdf`. The PDFs may include my phone number.
+- Resume PDFs go in `public/resumes/` as `Madhav-Sabu-Resume-CS.pdf`, `Madhav-Sabu-Resume-Econ.pdf`, and `Madhav-Sabu-Resume-Bio.pdf`.
 
 ---
 
@@ -172,18 +205,29 @@ Each project gets its own visual world when you open its stop:
 1. ✅ Lock the concept and hook (done in the design chat)
 2. ✅ Skeleton: one component per section (Hero, each project chapter, Experience, About, Resume, Contact), a simple nav, real content in plain styling, mobile-friendly. No theming or animation yet.
 3. ✅ Hero: the transit map and "Pick your route" interaction, including the resume switching.
-4. Chapters, one at a time: xG (Matchday) → Data Cleaning Pipeline (Clean run) → ShelfLife (Blueprint) → Research (Lab notebook)
+4. Chapters, one at a time (xG design approved, real data pending): xG (Matchday) → Data Cleaning Pipeline (Clean run) → ShelfLife (Blueprint) → Research (Lab notebook)
 5. Transitions between chapters
 6. Fill in and style Experience, About, Resume, and Contact
 7. Polish: mobile, load speed, accessibility, reduced motion
 
+## Waiting on Madhav (assets to add later)
+
+Leave clear placeholders for these until I provide them. Never fill them with made-up content.
+
+- [ ] **xG numbers:** data source, competitions and seasons, shot count, goal count, feature list, model type, test metrics (log loss, Brier score, ROC AUC), and a distance-only baseline for comparison
+- [ ] **xG shot sample:** a CSV of 200 to 500 shots with x, y, outcome, and the model's predicted xG once available, plus a note on the coordinate system
+- [ ] **xG extras (optional):** a calibration plot, feature importances, and a notebook link
+- [ ] **Data Cleaning Pipeline:** GitHub link, a sample messy input file, and its cleaning report output (rows in, duplicates and missing values removed, outliers flagged)
+- [ ] **ShelfLife schema:** the SQL `CREATE TABLE` file or a list of tables, columns, and foreign keys (for the Blueprint chapter)
+- [ ] **El Salvador paper:** PDF for `public/papers/`
+- [ ] **Resumes:** final CS, Econ, and Bio PDFs in `public/resumes/` (remove Mathematical Foundations of AI; make the GPA consistent)
+- [ ] **Photo:** a headshot or casual photo for About
+- [ ] **Electric Racing:** whether the club approved sharing Figma screenshots
+- [ ] **Enzyme experiment (optional):** chart or photos
+- [ ] **My Creative Factory (optional):** a video clip or still
+
 ## Current status
 
-- Steps 1 and 2 are done, and the skeleton is committed.
-- Step 3 is done (simple fade/slide transition only; the full ride-along animation is still to come).
-  - Map: `src/components/TransitMap.jsx` (a wide version, plus a tall version for phones under 640px).
-  - Line page: `src/components/LinePage.jsx`.
-  - Which stops are on which line, and each stop's subtitle: `src/data/lines.js`. Transfers are worked out automatically (a stop on two or more of B/C/D).
-  - The boarded line is in the URL (`#line-b` to `#line-e`). Clicking a stop jumps to its section and keeps the line boarded. "Back to map" or Home returns to the map.
-  - The bottom Resume button switches to the boarded line's version, or offers a menu of all three when no line is boarded (or on E).
-- Next up: Step 4, starting with the xG chapter (Matchday).
+- Steps 1 to 3 are done, plus the coursework panels, the Biology minor, and the copy proofread.
+- The xG "Matchday" chapter is built with placeholder data. Everything it shows lives in `src/data/xg.js`: the shots (with a note on the 0 to 100 coordinate system), the match report values (all "—"), the GitHub and notebook links (the notebook is `null` for now, which shows "coming soon"), and the How it works steps. When the real numbers are in, set `shotsArePlaceholder` to false and `resultsReady` to true.
+- After that: design the Data Cleaning Pipeline ("Clean run") chapter in the design chat.

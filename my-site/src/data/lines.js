@@ -39,22 +39,51 @@ export const stops = {
   },
 }
 
+// All coursework. `ib: true` marks IB transfer credit.
+export const courses = {
+  discrete: { name: 'Discrete Structures' },
+  databases: { name: 'Introduction to Databases' },
+  intermediate: { name: 'Intermediate Programming with Data' },
+  foundations: { name: 'Foundations of Data Science' },
+  advanced: { name: 'Advanced Programming with Data' },
+  visualization: { name: 'Information Presentation and Visualization' },
+  consumer: { name: 'Programming with Consumer Data' },
+  accounting: { name: 'Financial Accounting & Reporting' },
+  finance: { name: 'Financial Management' },
+  marketing: { name: 'Introduction to Marketing' },
+  cities: { name: 'Buildings and Cities' },
+  bio1: { name: 'General Biology 1', ib: true },
+  bio2: { name: 'General Biology 2', ib: true },
+  macro: { name: 'Principles of Macroeconomics', ib: true },
+  micro: { name: 'Principles of Microeconomics', ib: true },
+}
+
 // Branches in map order, top to bottom (like the real Green Line).
 // resume: which resume version the line's button gets (null = choose any).
 // phoneLabel: how the name wraps under its badge on the tall phone map.
+// coursework: ids from `courses` above, in display order.
+// subtitle / intro: optional extra text under the line page header.
 export const lines = [
   {
     letter: 'B',
     name: 'Business Analytics',
     phoneLabel: ['Business', 'Analytics'],
     stops: ['shelflife', 'pipeline', 'elsalvador', 'creativefactory', 'knack'],
+    coursework: ['accounting', 'finance', 'marketing', 'consumer', 'databases', 'visualization', 'macro', 'micro'],
     resume: 'econ',
   },
   {
     letter: 'C',
     name: 'Comp Bio',
     phoneLabel: ['Comp', 'Bio'],
+    subtitle: 'B.S. in Data Science & Business · Minor in Biology',
+    intro:
+      'I am pursuing a Minor in Biology alongside my degree in Data Science & Business. ' +
+      'This line brings the two together: a lab experiment in which I measured enzyme activity ' +
+      'and analyzed the results statistically, a pipeline that turns raw files into clean and ' +
+      'reliable data, and a machine learning model that I am building from real match data.',
     stops: ['enzyme', 'pipeline', 'xg'],
+    coursework: ['bio1', 'bio2', 'foundations', 'intermediate', 'advanced', 'databases'],
     resume: 'bio',
   },
   {
@@ -62,6 +91,7 @@ export const lines = [
     name: 'Data / ML',
     phoneLabel: ['Data/ML'],
     stops: ['xg', 'pipeline', 'shelflife'],
+    coursework: ['discrete', 'foundations', 'intermediate', 'advanced', 'databases', 'visualization'],
     resume: 'cs',
   },
   {
@@ -69,6 +99,7 @@ export const lines = [
     name: 'All stops',
     phoneLabel: ['All', 'stops'],
     stops: ['xg', 'pipeline', 'shelflife', 'elsalvador', 'enzyme'],
+    coursework: Object.keys(courses),
     resume: null,
   },
 ]

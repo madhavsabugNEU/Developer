@@ -52,9 +52,9 @@ export default function About() {
 
       <h3>Earlier project</h3>
       <p>
-        Sentiment Analysis Classifier (Jun to Jul 2023, team of 4): used Python,
-        pandas, and Jupyter to classify IMDB movie reviews as positive or
-        negative.
+        <strong>Sentiment Analysis Classifier</strong> (Jun to Jul 2023): With a
+        team of four, I built a classifier in Python, pandas, and Jupyter that
+        labeled IMDB movie reviews as positive or negative.
       </p>
 
       <h3>Leadership and activities</h3>
@@ -64,13 +64,16 @@ export default function About() {
         <li>Resident Student Association</li>
         <li>Badminton team captain (UWCSEA)</li>
         <li>
-          Special Olympics technical officer: coordinated logistics and coached
-          badminton athletes
+          Special Olympics technical officer (coordinated logistics and coached
+          badminton athletes)
         </li>
       </ul>
 
       <h3>Outside of class</h3>
-      <p>Badminton, football (soccer) analytics, biking, and exploring new music.</p>
+      <p>
+        Outside of class, I enjoy badminton, football (soccer) analytics,
+        biking, and exploring new music.
+      </p>
     </section>
   )
 }

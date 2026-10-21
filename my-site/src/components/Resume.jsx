@@ -5,7 +5,7 @@ export default function Resume() {
   return (
     <section id="resume" className="section">
       <h2>Resume</h2>
-      <p>Pick the version that best matches the role:</p>
+      <p>Choose the version that best matches the role:</p>
       <ul>
         {resumes.map((r) => (
           <li key={r.href}>

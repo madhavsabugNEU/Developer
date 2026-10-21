@@ -41,7 +41,11 @@ function Badge({ x, y, letter }) {
 }
 
 function Hub({ x, y }) {
-  return <circle className="hub" cx={x} cy={y} r="20" />
+  return (
+    <circle className="hub" cx={x} cy={y} r="20">
+      <title>Northeastern University · B.S. in Data Science &amp; Business · Minor in Biology</title>
+    </circle>
+  )
 }
 
 function spread(from, to, count) {

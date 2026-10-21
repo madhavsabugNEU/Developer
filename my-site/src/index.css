@@ -13,7 +13,7 @@
 }
 
 html {
-  scroll-padding-top: 4rem; /* keeps headings from hiding under the nav */
+  scroll-padding-top: 5rem; /* keeps headings from hiding under the nav */
 }
 
 body {
@@ -25,9 +25,7 @@ body {
 }
 
 main {
-  max-width: 44rem;
-  margin: 0 auto;
-  padding: 0 1rem 4rem;
+  padding-bottom: 4rem;
 }
 
 .site-nav {
@@ -49,7 +47,9 @@ main {
 }
 
 .section {
-  padding: 2rem 0;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
   border-bottom: 1px solid #eee;
 }
 
@@ -345,7 +345,6 @@ article + article {
 /* ---------- Line page ---------- */
 
 .line-page {
-  max-width: 44rem;
   margin-top: 1.25rem;
 }
 
@@ -479,4 +478,421 @@ article + article {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   vertical-align: 0.15em;
+}
+
+.line-subtitle {
+  margin: 0.1rem 0 0;
+  color: #444;
+}
+
+.line-intro {
+  max-width: 44rem;
+  margin: 0 0 1.25rem;
+}
+
+/* Stops on the left, coursework timetable on the right (stacked on phones). */
+.line-body {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .line-body {
+    grid-template-columns: minmax(0, 40rem) minmax(16rem, 24rem);
+    gap: 3rem;
+  }
+}
+
+/* ---------- Coursework timetable ---------- */
+
+.timetable {
+  border: 2px solid var(--navy);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.timetable h3 {
+  margin: 0;
+  padding: 0.5rem 0.85rem;
+  background: var(--navy);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.timetable ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timetable li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 0.75rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.92rem;
+  border-top: 1px solid #e3e6ec;
+}
+
+.timetable li:first-child {
+  border-top: 0;
+}
+
+.timetable li:nth-child(even) {
+  background: #f5f7fa;
+}
+
+.ib-tag {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--green);
+  white-space: nowrap;
+}
+
+/* ---------- xG chapter: "Matchday" ---------- */
+
+.matchday {
+  --pitch-bg: #0f2a1d;
+  --pitch: #123321;
+  --chalk: #eaf3de;
+  --chalk-2: #c0dd97;
+  --chalk-3: #97c459;
+  background: var(--pitch-bg);
+  color: var(--chalk);
+}
+
+.matchday-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.matchday a {
+  color: var(--chalk);
+}
+
+.matchday-lines {
+  margin: 0 0 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--chalk-3);
+}
+
+.matchday h2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.85rem;
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  line-height: 1.15;
+}
+
+.pill-progress {
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: #3a3410;
+  color: #fac775;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.matchday-intro {
+  max-width: 44rem;
+  margin: 0.85rem 0 0.35rem;
+  font-size: 1.05rem;
+  color: var(--chalk-2);
+}
+
+.matchday-meta {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--chalk-3);
+}
+
+.matchday-grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 860px) {
+  .matchday-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 1fr);
+    gap: 3rem;
+  }
+}
+
+/* Shot map */
+.shot-map {
+  margin: 0;
+}
+
+.shot-map > svg {
+  display: block;
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
+  margin-inline: auto;
+  border-radius: 0.4rem;
+}
+
+.pitch-bg {
+  fill: var(--pitch);
+}
+
+.pitch-lines rect,
+.pitch-lines path {
+  fill: none;
+  stroke: var(--chalk);
+  stroke-opacity: 0.35;
+  stroke-width: 0.3;
+}
+
+.pitch-lines .pitch-spot {
+  fill: var(--chalk);
+  fill-opacity: 0.35;
+}
+
+.pitch-lines .pitch-goal {
+  stroke-opacity: 0.6;
+}
+
+.shot {
+  fill-opacity: 0.9;
+  stroke: var(--pitch);
+  stroke-width: 0.25;
+  cursor: pointer;
+}
+
+.shot.is-goal {
+  stroke: var(--chalk);
+  stroke-width: 0.45;
+}
+
+.shot:hover,
+.shot:focus-visible,
+.shot.is-active {
+  outline: none;
+  stroke: #fff;
+  stroke-width: 0.6;
+  fill-opacity: 1;
+}
+
+.shot-detail {
+  min-height: 1.5em;
+  margin: 0.75rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--chalk);
+  text-align: center;
+}
+
+.shot-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem 0.9rem;
+  margin-top: 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--chalk-2);
+}
+
+.legend-title {
+  color: var(--chalk-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.shot-legend ul {
+  display: contents;
+  list-style: none;
+}
+
+.shot-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.shot-legend svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.legend-goal {
+  fill: none;
+  stroke: var(--chalk);
+  stroke-width: 0.6;
+}
+
+.shot-caption {
+  margin-top: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--chalk-3);
+  text-align: center;
+}
+
+/* Match report */
+.match-report {
+  padding: 1.25rem 1.25rem 1.4rem;
+  border: 1px solid rgb(234 243 222 / 0.2);
+  border-radius: 0.6rem;
+  background: rgb(18 51 33 / 0.7);
+}
+
+.match-report h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--chalk-3);
+}
+
+.match-report dl {
+  margin: 0;
+}
+
+.report-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgb(234 243 222 / 0.12);
+}
+
+.report-row dt {
+  color: var(--chalk-2);
+}
+
+.report-row dd {
+  margin: 0;
+  font-family: var(--mono);
+  color: var(--chalk);
+  text-align: right;
+}
+
+.report-note {
+  margin: 1rem 0 0;
+  padding: 0.75rem 0.9rem;
+  border: 1.5px dashed rgb(234 243 222 / 0.35);
+  border-radius: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--chalk-2);
+}
+
+.report-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.pill-link {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border: 1.5px solid var(--chalk-3);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.matchday a.pill-link:hover {
+  background: rgb(151 196 89 / 0.15);
+}
+
+.pill-link.is-disabled {
+  border-style: dashed;
+  border-color: rgb(234 243 222 / 0.35);
+  color: var(--chalk-3);
+}
+
+/* How it works */
+.how-it-works {
+  margin-top: 2.5rem;
+}
+
+.how-it-works h3 {
+  margin: 0 0 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--chalk-3);
+}
+
+.how-it-works ol {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 700px) {
+  .how-it-works ol {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  /* Arrow between steps on wide screens. */
+  .how-it-works li + li::before {
+    content: '→';
+    position: absolute;
+    left: -0.55rem;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--chalk-3);
+  }
+}
+
+.how-it-works li {
+  position: relative;
+  padding: 0.75rem 0.9rem;
+  border: 1.5px solid rgb(234 243 222 / 0.25);
+  border-radius: 0.5rem;
+  background: var(--pitch);
+}
+
+.how-it-works li.is-next {
+  border-style: dashed;
+  background: transparent;
+}
+
+.step-name {
+  display: block;
+  font-weight: 700;
+}
+
+.step-detail {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--chalk-2);
+}
+
+.step-tag {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fac775;
 }
