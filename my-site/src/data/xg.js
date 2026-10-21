@@ -8,11 +8,12 @@
 // Coordinate system: x and y are 0 to 100.
 //   x runs along the pitch length: 0 = your own goal line, 100 = the goal being attacked.
 //   y runs across the pitch: 0 = one touchline, 100 = the other.
-// The map shows the attacking half (x from 50 to 100), with the goal on the right.
+// The map shows the attacking half (x from 50 to 100), with the goal at the top.
 // If the real CSV uses another system (for example StatsBomb's 120 x 80),
 // convert it to 0 to 100 when building this list.
 //
 // Each shot: x, y, xg (the model's predicted probability, 0 to 1), goal (true or false).
+// Add `featured: true` to one shot to draw the angle and distance annotation on it.
 export const shotsArePlaceholder = true
 
 export const shots = [
@@ -22,6 +23,7 @@ export const shots = [
   { x: 82, y: 71, xg: 0.06, goal: false },
   { x: 76, y: 58, xg: 0.05, goal: false },
   { x: 87, y: 43, xg: 0.16, goal: false },
+  { x: 81, y: 36, xg: 0.08, goal: false, featured: true },
   { x: 71, y: 73, xg: 0.02, goal: false },
   { x: 74, y: 26, xg: 0.03, goal: false },
   { x: 94, y: 30, xg: 0.1, goal: false },
@@ -55,8 +57,7 @@ export const matchReport = [
   { label: 'vs. distance-only baseline', value: '—' },
 ]
 
-// Set to true once the stats above are real; this hides the placeholder note
-// and marks the Evaluate step as done.
+// Set to true once the stats above are real; this hides the placeholder note.
 export const resultsReady = false
 
 // ---------- Links ----------
@@ -66,11 +67,18 @@ export const xgLinks = {
   notebook: null,
 }
 
-// ---------- How it works ----------
-export const xgSteps = [
-  { name: 'Collect', detail: 'Historical match and shot data' },
-  { name: 'Clean', detail: 'A consistent training dataset' },
-  { name: 'Engineer', detail: 'Shot location, angle, and situation' },
-  { name: 'Model', detail: 'Python, pandas, scikit-learn' },
-  { name: 'Evaluate', detail: 'Test metrics and a baseline comparison' },
+// ---------- Live commentary (project progress) ----------
+// The five stages, in order. Change `stagesCompleted` as work finishes
+// (0 to 5); the clock, progress bar, and row icons all update from it.
+// Each stage is worth 18 minutes of a 90-minute match. While a stage is
+// being worked on, the clock shows the minute that stage ends at (so with
+// 3 stages done and Modeling in progress, it reads 72').
+export const stagesCompleted = 3
+
+export const stages = [
+  { name: 'Data collection', detail: 'Gathered historical match and shot data from past seasons.' },
+  { name: 'Data cleaning', detail: 'Standardized coordinates and events into a consistent training dataset.' },
+  { name: 'Feature engineering', detail: 'Derived shot distance, angle, and game-situation features.' },
+  { name: 'Modeling', detail: 'Building and iterating on a classifier in scikit-learn.' },
+  { name: 'Evaluation', detail: 'Testing against held-out data and a distance-only baseline.' },
 ]

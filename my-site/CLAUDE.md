@@ -179,16 +179,34 @@ Each project gets its own visual world when you open its stop:
 - **Research (El Salvador, enzyme) → "Lab notebook":** graph paper, serif type, annotated pages
 - After the projects, Experience, About, Resume, and Contact go back to the calm navy-and-white style.
 
-### xG chapter ("Matchday"), approved mockup
+### xG chapter ("Matchday"), approved design (v2)
 
-- **Colors:** background `#0f2a1d` (dark pitch green), pitch `#123321`, chalk lines `#eaf3de` at about 35% opacity, text `#eaf3de`, secondary text `#c0dd97`, small labels `#97c459`. The "In progress" pill is amber (`#fac775` text on `#3a3410`).
-- **Header:** a small monospace label showing which lines this stop is on (D line, C line transfer), the title "xG Modeling in Football," the amber "In progress" pill, and a one-sentence description in complete, formal sentences.
-- **Two columns on desktop (stacked on phones):**
-  - **Left, shot map:** a half-pitch drawn in SVG with the goal on the right. Shots are circles sized and colored by xG, on a scale from dark green (low) through light green to amber (high), with a legend underneath. Hovering or tapping a shot shows its details in a line below the map.
-    - **For now,** use clearly labeled placeholder shots, with the caption "illustrative shots · placeholder data." Keep the data in a separate file (for example `src/data/xgShots.js` or a JSON file) so I can swap in my real CSV later without touching the component.
-  - **Right, "match report" panel:** stat rows for Shots in dataset, Goals (base rate), Competitions · seasons, Features, Model, Test log loss, and vs. distance-only baseline. Every value shows "—" until I provide real numbers. Keep these values in the same data file. Under the stats, a dashed placeholder note ("Results appear here once the model is evaluated.") and pill links to the GitHub repo and the notebook (the notebook link is a placeholder for now).
-- **"How it works" strip:** five steps: Collect → Clean → Engineer → Model → Evaluate. Evaluate is styled as dashed or "up next" until results exist.
-- **Motion:** none required yet. Keep it static and fast.
+- **Colors:** background `#0f2a1d` (dark pitch green), pitch `#123321`, chalk lines `#eaf3de` at about 30% opacity, text `#eaf3de`, secondary text `#c0dd97`, small labels `#97c459`, muted/upcoming `#5e7d68`. Amber `#fac775` for highlights (text on `#3a3410` for pills). Live red `#e24b4a`.
+- **Header:** a small monospace label showing which lines this stop is on (D line · C line transfer), the title "xG Modeling in Football," the amber "In progress" pill, a one-sentence description in formal, complete sentences, and a meta line (Solo project · Jul 2026 to present · Python, pandas, scikit-learn).
+
+**Shot map (left column on desktop, stacked on phones):**
+- A **horizontal half-pitch with the goal at the top** (landscape, roughly 340×250 proportions), with accurate markings: penalty box, six-yard box, penalty arc, and halfway arc at the bottom.
+- **All shots are the same small size** (radius about 4) and **colored by xG only**, using a smooth gradient from dark green (low) through light green to amber (high), at about 75% opacity. No size encoding and no outlines for goals.
+- **One featured shot is annotated:** a light amber wedge from the shot to both goalposts (labeled "angle"), a dashed line to the center of the goal (labeled "distance"), and the dot itself in amber with a "this shot" label.
+- **Beside the map:** a short heading, "How xG reads a shot," and two or three sentences explaining that xG depends mostly on how much of the goal the shooter can see and how far away they are. Below that, a simple gradient legend (low → high xG) and the caption "illustrative · placeholder data."
+- Hovering or tapping a shot shows its details (xG, outcome, distance) in one line. Goals are revealed only on hover or tap.
+- Shot data stays in the separate data file so I can swap in my real CSV.
+
+**Match report panel (right column):** unchanged. Stat rows show "—" until real numbers arrive, with a dashed placeholder note and pill links (GitHub repo, Notebook · coming soon).
+
+**"Live commentary" progress tracker (replaces the old "how it works" arrow strip):**
+- **Top bar:** a "project progress" label on the left. On the right, a red "● LIVE" tag and the clock `72' / 90'`.
+- **Match clock progress bar:** a thin bar filled to 72/90 (80%), with a faint half-time tick at 50%. Labels under it: "kickoff," "half time," and "full time = finished."
+- **One-line key:** "A football match lasts 90 minutes, and each completed stage moves the clock forward 18."
+- **Five rows.** Each row has a status icon, a plain step name (bold), a one-sentence description, and a small minute badge on the right:
+  1. ✓ **Data collection** (18'): Gathered historical match and shot data from past seasons.
+  2. ✓ **Data cleaning** (36'): Standardized coordinates and events into a consistent training dataset.
+  3. ✓ **Feature engineering** (54'): Derived shot distance, angle, and game-situation features.
+  4. ● **Modeling** (72', amber badge, red pulsing "live" dot, "now playing" tag): Building and iterating on a classifier in scikit-learn.
+  5. ○ **Evaluation** (90', dimmed): Testing against held-out data and a distance-only baseline.
+- Plain step names always come first, so the tracker makes sense to people who don't follow football.
+- The pulsing live dot respects `prefers-reduced-motion` (no animation if it's on).
+- **Keep the stage list and current stage in the data file.** The clock is computed as completed stages × 18. When all five are done, the clock shows 90', the LIVE tag changes to "Full time," and the "In progress" pill can be removed.
 
 ### Guardrails
 
@@ -228,6 +246,7 @@ Leave clear placeholders for these until I provide them. Never fill them with ma
 
 ## Current status
 
-- Steps 1 to 3 are done, plus the coursework panels, the Biology minor, and the copy proofread.
-- The xG "Matchday" chapter is built with placeholder data. Everything it shows lives in `src/data/xg.js`: the shots (with a note on the 0 to 100 coordinate system), the match report values (all "—"), the GitHub and notebook links (the notebook is `null` for now, which shows "coming soon"), and the How it works steps. When the real numbers are in, set `shotsArePlaceholder` to false and `resultsReady` to true.
+- Steps 1 to 3 are done, and the first version of the xG chapter is built.
+- The xG chapter is updated to the v2 design. Everything it shows is in `src/data/xg.js`: the shots (mark one with `featured: true` for the angle and distance annotation), the match report values, the links, and the five stages. Change `stagesCompleted` (now 3) as work finishes; the clock, progress bar, and rows update from it. At 5, the clock shows 90', LIVE becomes "Full time," and the "In progress" pill disappears.
+- Clock rule as built: while a stage is in progress, the clock shows that stage's end minute (3 done + Modeling in progress = 72'), matching the approved mockup. Confirm or change.
 - After that: design the Data Cleaning Pipeline ("Clean run") chapter in the design chat.
