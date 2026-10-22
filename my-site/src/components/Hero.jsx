@@ -10,7 +10,15 @@ export default function Hero() {
         <br />
         Turning messy data into reliable insights.
       </p>
-      <p className="map-prompt">pick a line to board →</p>
+      <div className="hero-instructions">
+        <p className="hero-instructions-lead">
+          Choose a line to explore my work in that field.
+        </p>
+        <p>
+          Each line shows the projects, coursework, and resume most relevant to
+          that role. Not sure where to start? Take the E line to see everything.
+        </p>
+      </div>
       <TransitMap />
       <ContactLinks />
     </header>

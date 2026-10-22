@@ -507,11 +507,26 @@ article + article {
   font-size: clamp(1rem, 2.2vw, 1.25rem);
 }
 
-.map-prompt {
-  margin: 1rem 0 0;
-  font-family: var(--mono);
-  font-size: 0.85rem;
-  color: var(--green);
+.hero-instructions {
+  max-width: 40rem;
+  margin: 1.1rem 0 0;
+  font-size: 1.0625rem;
+  color: #2b3445;
+}
+
+.hero-instructions p {
+  margin: 0;
+}
+
+.hero-instructions .hero-instructions-lead {
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.map .map-cue {
+  font-size: 13px;
+  fill: var(--green);
 }
 
 .hero-links {

@@ -92,6 +92,10 @@ function HorizontalMap() {
         )
       })}
 
+      <text className="map-cue" x={turnX} y={branchY[0] - 26}>
+        click a line to board →
+      </text>
+
       <Hub x={hubX} y={midY} />
       <text className="hub-label" x={hubX} y={midY + 50} textAnchor="middle">
         Northeastern
@@ -111,7 +115,7 @@ function VerticalMap() {
   const endY = 380
 
   return (
-    <svg className="map map-vertical" viewBox="0 0 360 470">
+    <svg className="map map-vertical" viewBox="0 0 360 490">
       <line className="journey-line" x1={midX} y1={journeyY[0]} x2={midX} y2={hubY} />
       {journey.map((name, i) => (
         <g key={name} className="journey-stop">
@@ -141,6 +145,11 @@ function VerticalMap() {
           </BranchLink>
         )
       })}
+
+      {/* On the tall map the branches are above this line, so the arrow points up. */}
+      <text className="map-cue" x={midX} y={endY + 96} textAnchor="middle">
+        ↑ tap a line to board
+      </text>
 
       <Hub x={midX} y={hubY} />
       <text className="hub-label" x={midX + 30} y={hubY} dy="0.35em">

@@ -127,7 +127,12 @@ Badminton, football (soccer) analytics, biking, exploring new music.
 
 ### The hero (first screen), approved mockup
 
-- Top left: my name (navy, large), a two-line pitch ("Data science + business at Northeastern." / "Turning messy data into reliable insights."), and a small monospace prompt: "pick a line to board →".
+- Top left: my name (navy, large) and a two-line pitch ("Data science + business at Northeastern." / "Turning messy data into reliable insights.").
+- **Clear instructions for choosing a line.** Directly above the map (or beside it on wide screens), add a short, clearly visible prompt in regular body text (not tiny monospace), navy or dark gray, about 16 to 18px:
+  - Line 1 (slightly bolder): **"Choose a line to explore my work in that field."**
+  - Line 2: "Each line shows the projects, coursework, and resume most relevant to that role. Not sure where to start? Take the E line to see everything."
+  - Keep a small green monospace cue near the branches ("tap a line to board →" on phones, "click a line to board →" on desktop) so the map itself also reads as clickable.
+  - Each branch's hover state (thicker line, underlined label, pointer cursor) should make it obvious it's clickable.
 - The map, left to right:
   - **My journey before Boston:** a dotted navy line with three small stations: **India → Dubai → Singapore**.
   - **Northeastern:** a big hub station (a white circle with a thick green ring), where the line turns solid green.
@@ -259,12 +264,13 @@ Get everything working and complete first. Fancy animations come last.
 2. ✅ Skeleton
 3. ✅ Hero: the transit map and "Pick your route"
 4. ✅ xG world, v2 design (placeholder data)
-5. **Restructure:** routing, the home page with the Stations directory and preview cards, line pages, world pages with the navy bar and next-stop sign, `vercel.json`, and nav styling. Move the existing xG chapter onto `/xg`. Other worlds can be plain placeholder pages for now.
-6. Experience, About, Resume, and Contact: content and navy-and-white styling
-7. The remaining worlds (each designed in the design chat first): Data Cleaning Pipeline ("Clean run") → ShelfLife ("Blueprint") → Research ("Lab notebook")
-8. Swap in real assets as they arrive (see "Waiting on Madhav")
-9. Make it fancy: card-to-page expand animation, line boarding animation, other motion (always respecting reduced motion)
-10. Polish: mobile, load speed, accessibility, typography, final proofread
+5. ✅ **Restructure:** routing, the home page with the Stations directory and preview cards, line pages, world pages with the navy bar and next-stop sign, `vercel.json`, and nav styling. Move the existing xG chapter onto `/xg`. Other worlds can be plain placeholder pages for now.
+6. **Data Cleaning Pipeline world ("Clean run")**: designed in the design chat first, then built with real assets (the project is finished, so real data is available)
+7. Experience, About, Resume, and Contact: content and navy-and-white styling
+8. The remaining worlds (each designed in the design chat first): ShelfLife ("Blueprint") → Research ("Lab notebook")
+9. Swap in real assets as they arrive (see "Waiting on Madhav")
+10. Make it fancy: card-to-page expand animation, line boarding animation, other motion (always respecting reduced motion)
+11. Polish: mobile, load speed, accessibility, typography, final proofread
 
 ## Waiting on Madhav (assets to add later)
 
@@ -273,7 +279,15 @@ Leave clear placeholders for these until I provide them. Never fill them with ma
 - [ ] **xG numbers:** data source, competitions and seasons, shot count, goal count, feature list, model type, test metrics (log loss, Brier score, ROC AUC), and a distance-only baseline for comparison
 - [ ] **xG shot sample:** a CSV of 200 to 500 shots with x, y, outcome, and the model's predicted xG once available, plus a note on the coordinate system
 - [ ] **xG extras (optional):** a calibration plot, feature importances, and a notebook link
-- [ ] **Data Cleaning Pipeline:** GitHub link, a sample messy input file, and its cleaning report output (rows in, duplicates and missing values removed, outliers flagged)
+- [ ] **Data Cleaning Pipeline (needed next):**
+  - GitHub repo link (or confirmation that it's private/course-restricted, in which case no link)
+  - The README, or a short description of how to run it (the exact command, such as `python -m src.main --config config.yaml`)
+  - One example config YAML
+  - A real messy sample input file (or the first ~20 rows), and the cleaned output for the same file
+  - The full cleaning report it generated for that file (rows in, rows out, duplicates removed, missing values handled, outliers flagged by IQR and z-score)
+  - The list of modules in `src/` and one line on what each does
+  - The terminal output or log from one run (a screenshot or pasted text)
+  - Whether the course allows sharing the code publicly
 - [ ] **ShelfLife schema:** the SQL `CREATE TABLE` file or a list of tables, columns, and foreign keys (for the Blueprint chapter)
 - [ ] **El Salvador paper:** PDF for `public/papers/`
 - [ ] **Resumes:** final CS, Econ, and Bio PDFs in `public/resumes/` (remove Mathematical Foundations of AI; make the GPA consistent)
@@ -284,13 +298,8 @@ Leave clear placeholders for these until I provide them. Never fill them with ma
 
 ## Current status
 
-- Steps 1 to 4 are done.
-- Step 5 (restructure) is done.
-  - Routes: `/` (hero + Stations + Experience/About/Resume/Contact), `/line/b` to `/line/e`, and the worlds `/xg`, `/pipeline`, `/shelflife`, `/research`. Page files are in `src/pages/`. Unknown addresses show a "This stop doesn't exist" page.
-  - `vercel.json` sends every route to `index.html`, so direct links and refreshes work on Vercel.
-  - The line a visitor came from is kept as `?line=d` in the address. Invalid or unrelated lines are ignored (the page falls back to "Back to stations" and E line order).
-  - Station cards and world info (title, tag, one-sentence description) are in `src/data/worlds.js`. Stop links and the line labels are worked out from `src/data/lines.js`.
-  - Next stop on a line can be a non-world stop (on the B line, Research → My Creative Factory, which opens Experience on the home page).
-  - Old `/#line-d` links redirect to `/line/d`.
-  - Pipeline, ShelfLife, and Research worlds are placeholders that show the existing plain content with a "full design is coming soon" note.
-- Next: Step 6 (Experience, About, Resume, Contact).
+- Steps 1 to 5 are done (Step 5 restructure was committed in "new structure for website, different skeleton").
+  - Routes: `/`, `/line/b` to `/line/e`, `/xg`, `/pipeline`, `/shelflife`, `/research` (page files in `src/pages/`). `vercel.json` makes direct links work on Vercel.
+  - The line a visitor came from is kept as `?line=d`. Station card text is in `src/data/worlds.js`.
+- Hero instruction text is added above the map. The green cue reads "click a line to board →" on the wide map and "↑ tap a line to board" under the branches on the phone map (the arrow points up there because the branches are above it).
+- Next: Step 6, the Data Cleaning Pipeline world. Madhav is gathering the pipeline assets listed under "Waiting on Madhav." The design gets mocked up in the design chat first.
