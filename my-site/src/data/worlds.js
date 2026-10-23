@@ -3,6 +3,7 @@ import { stops, findLine, stopLink } from './lines.js'
 // The four project world pages, in E line order. Also used for the
 // station cards on the home page.
 // stopIds: which stops (from lines.js) this world covers.
+// leadLine: optional line to list first in "lines …" labels (others go alphabetically).
 export const worlds = [
   {
     id: 'xg',
@@ -11,13 +12,14 @@ export const worlds = [
     description:
       'I am building an expected goals model that estimates the probability of a shot becoming a goal.',
     stopIds: ['xg'],
+    leadLine: 'D',
   },
   {
     id: 'pipeline',
     title: 'Data Cleaning Pipeline',
     tag: 'Course project',
     description:
-      'I built a configurable command-line pipeline that validates and cleans CSV, JSON, and YAML files.',
+      'I built a configurable command-line pipeline that validates and cleans CSV data using rules set in a YAML file.',
     stopIds: ['pipeline'],
   },
   {

@@ -133,11 +133,14 @@ export function findLine(letter) {
   return lines.find((line) => line.letter === letter.toUpperCase()) ?? null
 }
 
-// "D · C" for the lines (not counting E) that include any of these stops.
-export function linesLabel(stopIds) {
-  return lines
+// "B · C · D" for the lines (not counting E) that include any of these stops.
+// leadLine, if given, is listed first ("D · C").
+export function linesLabel(stopIds, leadLine) {
+  const letters = lines
     .filter((line) => line.letter !== 'E' && stopIds.some((id) => line.stops.includes(id)))
     .map((line) => line.letter)
-    .reverse()
-    .join(' · ')
+  if (leadLine && letters.includes(leadLine)) {
+    return [leadLine, ...letters.filter((l) => l !== leadLine)].join(' · ')
+  }
+  return letters.join(' · ')
 }

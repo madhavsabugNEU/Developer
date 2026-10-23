@@ -19,7 +19,7 @@ export default function WorldFrame({ worldId, children }) {
       <TopBar
         backTo={line ? `/line/${line.letter.toLowerCase()}` : '/#stations'}
         backLabel={line ? `Back to ${line.letter} line` : 'Back to stations'}
-        rightLabel={`lines ${linesLabel(world.stopIds)}`}
+        rightLabel={`lines ${linesLabel(world.stopIds, world.leadLine)}`}
       />
       <main className="world">{children}</main>
       {next && <NextStopSign next={next} />}

@@ -32,7 +32,7 @@ export default function Stations() {
                 </div>
                 <div className="station-body">
                   <div className="station-meta">
-                    <span className="station-lines">lines {linesLabel(world.stopIds)}</span>
+                    <span className="station-lines">lines {linesLabel(world.stopIds, world.leadLine)}</span>
                     <span className="station-tag">{world.tag}</span>
                   </div>
                   <h3 className="station-title">{world.title}</h3>

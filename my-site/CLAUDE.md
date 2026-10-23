@@ -66,10 +66,12 @@ IB transfer credit: General Biology 1 and 2, Principles of Macroeconomics and Mi
    - Demo video (embed it): https://www.youtube.com/watch?v=jpNh5U-58YQ
    - Always describe it as a team project and highlight only my parts.
 
-3. **Data Cleaning Pipeline** (DS 3500 course project, Fall 2026)
-   - Python, pandas, YAML, argparse, logging
-   - Configurable command-line pipeline that loads CSV, JSON, and YAML files, validates required columns and numeric fields, removes duplicates, missing values, and outliers (IQR and z-score), and generates a cleaning report. Modular `src/` package design.
+3. **Data Cleaning Pipeline** (DS 3500 course project, Fall 2026, complete: Parts 1 to 4)
+   - Python, pandas, PyYAML, argparse, logging
+   - Configurable command-line pipeline. It loads CSV data and a YAML config, validates required columns and numeric fields, removes duplicates, missing values, and outliers (IQR or z-score, set in the config), saves the cleaned CSV, and prints a cleaning report. Modular `src/` package: `data_loaders` (CSV, JSON, YAML loading by file extension), `data_validator`, `data_processor` (cleaning steps + report), `data_output`, and `utils` (logging setup, file checks). `pipeline.py` orchestrates the stages.
    - Label it as a course project built from an assignment spec.
+   - **Accuracy notes:** The JSON loader returns a dictionary, so don't claim the pipeline cleans JSON datasets. Say it "loads CSV data and YAML configuration." The sample dataset (`fixtures/sample_data.csv`) was **provided by the course**, so never say I designed or created it.
+   - GitHub: https://github.com/madhavsabugNEU/mp1-data-pipeline
 
 4. **Economic Impact of El Salvador's Gang Crackdown** (Mar to Nov 2024, independent research)
    - 4,000-word research paper analyzing up to 23 years of World Bank, IMF, ILO, and CEPAL data across 4 indicators (GDP growth, foreign investment, unemployment, wellbeing).
@@ -246,6 +248,52 @@ Each project has its own world page with its own visual theme:
 - The pulsing live dot respects `prefers-reduced-motion` (no animation if it's on).
 - **Keep the stage list and current stage in the data file.** The clock is computed as completed stages × 18. When all five are done, the clock shows 90', the LIVE tag changes to "Full time," and the "In progress" pill can be removed.
 
+### Pipeline world ("Clean run"), approved design (built from a real run)
+
+Route: `/pipeline`. It gets the standard navy top bar ("← Back to …" plus "lines B · C · D") and a next-stop sign at the bottom.
+
+**Colors:** paper `#f6f3ec`, text `#1b1b1b`, secondary `#52514e`, muted `#8a8577`, rule lines `#e4ddcc`, rust accent `#b4502a` (problems, labels), green `#3b6d11` (✓ success), card background `#fffdf8`, terminal `#1f1d19` with text `#d8d2c2`. Monospace for data, labels, and code.
+
+**Header:** a rust monospace label "clean run," the title "Data Cleaning Pipeline," a muted meta line ("DS 3500 course project · built from an assignment spec · Python, pandas, PyYAML, argparse, logging"), and this description:
+> A configurable command-line pipeline that loads a dataset, validates it, removes duplicates, missing values, and outliers, and saves the result with a cleaning report. Every cleaning rule is set in a YAML file, so the same code can clean a different dataset without changes.
+
+**Main interactive piece (two columns on desktop, stacked on phones):**
+- **Left: a "problem rows" table** labeled "fixtures/sample_data.csv · the 8 problem rows" (the course-provided sample of 100 records), with a **"▶ Run pipeline"** button. Columns: id, name, rating, cat, and a reason column. Empty values display as rust "NaN." The rows, all real:
+
+  | id | name | rating | category | removed at | reason |
+  |---|---|---|---|---|---|
+  | 95 | Record_095 | not_available | C | Validate | invalid number |
+  | 96 | Record_096 | error | A | Validate | invalid number |
+  | 1 | Record_001 | 67 | B | Duplicates | duplicate |
+  | 2 | Record_002 | 74 | C | Duplicates | duplicate |
+  | 97 | Record_097 | (empty) | B | Missing | missing rating |
+  | 98 | Record_098 | 75 | (empty) | Missing | missing category |
+  | 93 | Record_093 | 200 | A | Outliers | outlier (IQR) |
+  | 94 | Record_094 | -50 | B | Outliers | outlier (IQR) |
+
+  Under the table: "+ 92 clean rows pass through untouched."
+- **Right: a big row counter** ("100 → 92") and a **stage list**, each stage with a status dot and a row count: Load 100 · Validate 98 · Remove duplicates 96 · Drop missing values 94 · Remove outliers (IQR 1.5) 92.
+- **Pressing Run** plays the stages in order (about 0.9s apart). At each stage, its rows get struck through and dimmed, their reason fades in, the stage's dot turns green, and the counter updates. Then the button changes to "↻ Run again." With reduced motion, everything happens instantly. Before anyone presses Run, the page shows the starting state (100 rows, Load stage active).
+
+**Below, revealed fully after the run (dimmed before it):** three cards in a row (stacked on phones):
+1. **"✓ cleaning report":** rows_before: 98 · rows_after: 92 · rows_removed: 6 · columns: 5 → 5, with the footnote "Counted after validation, which removed 2 more rows first."
+2. **"under the hood":** a file tree: pipeline.py (orchestrates) and src/ with data_loaders (CSV · JSON · YAML), data_validator (columns, numerics), data_processor (clean + report), data_output (save CSV), utils (logging, file checks).
+3. **"config.yaml":** remove_duplicates: true · missing: axis: rows · outliers: method: iqr (# or zscore) · threshold: 1.5
+
+**Terminal strip** (dark, horizontally scrollable on small screens), showing real log lines:
+```
+$ python pipeline.py --input fixtures/sample_data.csv --output output/clean.csv --config config/config.yaml --verbose
+WARNING  Invalid numeric value in rating at row 94: 'not_available'
+INFO     Validation complete: 100 -> 98 rows
+DEBUG    rating: lower=43.625, upper=106.625, removed=2
+INFO     Processing complete: 98 -> 92 rows
+```
+**Links:** a GitHub repo pill button.
+
+**Station card preview** (home page): keep the cream preview with struck-out messy rows → "✓ clean." It can show "100 → 92 rows."
+
+**Keep all of this data in a data file** (for example `src/data/pipeline.js`) so it's easy to update.
+
 ### Guardrails
 
 - A simple nav to jump to any section must always be available.
@@ -264,8 +312,8 @@ Get everything working and complete first. Fancy animations come last.
 2. ✅ Skeleton
 3. ✅ Hero: the transit map and "Pick your route"
 4. ✅ xG world, v2 design (placeholder data)
-5. ✅ **Restructure:** routing, the home page with the Stations directory and preview cards, line pages, world pages with the navy bar and next-stop sign, `vercel.json`, and nav styling. Move the existing xG chapter onto `/xg`. Other worlds can be plain placeholder pages for now.
-6. **Data Cleaning Pipeline world ("Clean run")**: designed in the design chat first, then built with real assets (the project is finished, so real data is available)
+5. **Restructure:** routing, the home page with the Stations directory and preview cards, line pages, world pages with the navy bar and next-stop sign, `vercel.json`, and nav styling. Move the existing xG chapter onto `/xg`. Other worlds can be plain placeholder pages for now.
+6. ✅ **Data Cleaning Pipeline world ("Clean run")**: design approved (see "Pipeline world")
 7. Experience, About, Resume, and Contact: content and navy-and-white styling
 8. The remaining worlds (each designed in the design chat first): ShelfLife ("Blueprint") → Research ("Lab notebook")
 9. Swap in real assets as they arrive (see "Waiting on Madhav")
@@ -279,15 +327,8 @@ Leave clear placeholders for these until I provide them. Never fill them with ma
 - [ ] **xG numbers:** data source, competitions and seasons, shot count, goal count, feature list, model type, test metrics (log loss, Brier score, ROC AUC), and a distance-only baseline for comparison
 - [ ] **xG shot sample:** a CSV of 200 to 500 shots with x, y, outcome, and the model's predicted xG once available, plus a note on the coordinate system
 - [ ] **xG extras (optional):** a calibration plot, feature importances, and a notebook link
-- [ ] **Data Cleaning Pipeline (needed next):**
-  - GitHub repo link (or confirmation that it's private/course-restricted, in which case no link)
-  - The README, or a short description of how to run it (the exact command, such as `python -m src.main --config config.yaml`)
-  - One example config YAML
-  - A real messy sample input file (or the first ~20 rows), and the cleaned output for the same file
-  - The full cleaning report it generated for that file (rows in, rows out, duplicates removed, missing values handled, outliers flagged by IQR and z-score)
-  - The list of modules in `src/` and one line on what each does
-  - The terminal output or log from one run (a screenshot or pasted text)
-  - Whether the course allows sharing the code publicly
+- [x] **Data Cleaning Pipeline:** done. Real run data is in the "Pipeline world" section.
+- [ ] **Pipeline (optional):** if I update the cleaning report to count the validation step (100 → 92 with a per-stage breakdown), update the report card on the pipeline world and remove the footnote.
 - [ ] **ShelfLife schema:** the SQL `CREATE TABLE` file or a list of tables, columns, and foreign keys (for the Blueprint chapter)
 - [ ] **El Salvador paper:** PDF for `public/papers/`
 - [ ] **Resumes:** final CS, Econ, and Bio PDFs in `public/resumes/` (remove Mathematical Foundations of AI; make the GPA consistent)
@@ -298,8 +339,8 @@ Leave clear placeholders for these until I provide them. Never fill them with ma
 
 ## Current status
 
-- Steps 1 to 5 are done (Step 5 restructure was committed in "new structure for website, different skeleton").
-  - Routes: `/`, `/line/b` to `/line/e`, `/xg`, `/pipeline`, `/shelflife`, `/research` (page files in `src/pages/`). `vercel.json` makes direct links work on Vercel.
-  - The line a visitor came from is kept as `?line=d`. Station card text is in `src/data/worlds.js`.
-- Hero instruction text is added above the map. The green cue reads "click a line to board →" on the wide map and "↑ tap a line to board" under the branches on the phone map (the arrow points up there because the branches are above it).
-- Next: Step 6, the Data Cleaning Pipeline world. Madhav is gathering the pipeline assets listed under "Waiting on Madhav." The design gets mocked up in the design chat first.
+- Steps 1 to 5 are done (assuming the restructure and hero instructions are finished).
+- Step 6 is done: the pipeline "Clean run" world is live at `/pipeline`. All rows, counts, stages, report values, file tree, config lines, and log lines are in `src/data/pipeline.js`. The station card preview shows "100 → 92 rows" (read from the same file).
+  - The pipeline station card text no longer says it cleans JSON (per the accuracy note).
+  - "lines …" labels are now alphabetical (B · C · D), except xG, which lists D first (`leadLine` in `src/data/worlds.js`).
+- Next: Step 7 (Experience, About, Resume, Contact).
